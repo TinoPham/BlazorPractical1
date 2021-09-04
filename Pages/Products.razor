@@ -1,8 +1,11 @@
 ﻿@page "/products"
 
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-5">
 		<Search OnSearchChanged="SearchChanged"></Search>
+	</div>
+	<div class="col-md-5">
+		<Sort OnSortChanged="SortChanged"></Sort>
 	</div>
 	<div class="col-md-2">
 		<a href="/createProduct">Create Product</a>
