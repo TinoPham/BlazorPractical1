@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorProducts.Client", "BlazorProducts.Client.csproj", "{A237E408-2591-4598-B4E6-CF29877B8489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProducts.Client", "BlazorProducts.Client.csproj", "{A237E408-2591-4598-B4E6-CF29877B8489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorProducts.Server", "..\BlazorProducts.Server\BlazorProducts.Server.csproj", "{8C428D32-6038-4D06-A2AF-825B0E4789AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProducts.Server", "..\BlazorProducts.Server\BlazorProducts.Server.csproj", "{8C428D32-6038-4D06-A2AF-825B0E4789AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorProducts.Shared", "..\BlazorProducts.Shared\BlazorProducts.Shared.csproj", "{A49B54C0-A666-4B55-B59E-53BD1FF4E9AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProducts.Shared", "..\BlazorProducts.Shared\BlazorProducts.Shared.csproj", "{A49B54C0-A666-4B55-B59E-53BD1FF4E9AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

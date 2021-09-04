@@ -1,5 +1,6 @@
 ﻿using BlazorProducts.Client.HttpRepository;
 using BlazorProducts.Shared.Entities;
+using BlazorProducts.Shared.RequestFetures;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,29 @@ namespace BlazorProducts.Client.Pages
 	public partial class Products
 	{
         public List<Product> ProductList { get; set; } = new List<Product>();
+        public MetaData MetaData { get; set; } = new MetaData();
+
+        private ProductParameters _productParameters = new ProductParameters();
         
         [Inject]
         public IProductHttpRepository ProductRepo { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
-            ProductList = await ProductRepo.GetProductsAsync();
-            
+            await GetProductsAsync();
+        }
+
+        private async Task SelectedPage(int page)
+        {
+            _productParameters.PageNumber = page;
+            await GetProductsAsync();
+        }
+
+        private async Task GetProductsAsync()
+        {
+            var pagingResponse = await ProductRepo.GetProductsAsync(_productParameters);
+            ProductList = pagingResponse.Items;
+            MetaData = pagingResponse.MetaData;
         }
     }
 }
