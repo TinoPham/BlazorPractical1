@@ -1,4 +1,6 @@
-﻿using BlazorProducts.Shared.Entities;
+﻿using BlazorProducts.Client.Features;
+using BlazorProducts.Shared.Entities;
+using BlazorProducts.Shared.RequestFetures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,6 @@ namespace BlazorProducts.Client.HttpRepository
 {
 	public interface IProductHttpRepository
 	{
-		Task<List<Product>> GetProductsAsync();
+		Task<PagingResponse<Product>> GetProductsAsync(ProductParameters productParameters);
 	}
 }

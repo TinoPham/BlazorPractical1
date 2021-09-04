@@ -1,4 +1,7 @@
-﻿using BlazorProducts.Shared.Entities;
+﻿using BlazorProducts.Client.Features;
+using BlazorProducts.Shared.Entities;
+using BlazorProducts.Shared.RequestFetures;
+using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +22,27 @@ namespace BlazorProducts.Client.HttpRepository
 			_jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 		}
 
-		public async Task<List<Product>> GetProductsAsync()
+		public async Task<PagingResponse<Product>> GetProductsAsync(ProductParameters productParameters)
 		{
-			var response = await _httpClient.GetAsync("products");
+			var queryStringParam = new Dictionary<string, string>
+			{
+				["pageNumber"] = productParameters.PageNumber.ToString()
+			};
+
+			var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("products", queryStringParam));
 			var content = await response?.Content.ReadAsStringAsync();
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new ApplicationException(content);
 			}
 
-			var products = JsonSerializer.Deserialize<List<Product>>(content, _jsonSerializerOptions);
-			return products;
+			var paginResponse = new PagingResponse<Product>
+			{
+				Items = JsonSerializer.Deserialize<List<Product>>(content, _jsonSerializerOptions),
+				MetaData = JsonSerializer.Deserialize<MetaData>(response.Headers.GetValues("X-Pagination").First(), _jsonSerializerOptions)
+			};
+
+			return paginResponse;
 		}
 	}
 }
