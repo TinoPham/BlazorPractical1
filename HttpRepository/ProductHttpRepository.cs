@@ -109,5 +109,17 @@ namespace BlazorProducts.Client.HttpRepository
 			}
 		}
 
+		public async Task DeleteProductAsync(Guid id)
+		{
+			var url = Path.Combine("products", id.ToString());
+
+			var deleteResult = await _httpClient.DeleteAsync(url);
+			var deleteContent = await deleteResult.Content.ReadAsStringAsync();
+
+			if (!deleteResult.IsSuccessStatusCode)
+			{
+				throw new ApplicationException(deleteContent);
+			}
+		}
 	}
 }

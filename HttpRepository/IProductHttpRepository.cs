@@ -1,6 +1,7 @@
 ﻿using BlazorProducts.Client.Features;
 using BlazorProducts.Shared.Entities;
 using BlazorProducts.Shared.RequestFetures;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,5 +14,6 @@ namespace BlazorProducts.Client.HttpRepository
 		Task<string> UploadProductImage(MultipartFormDataContent content);
 		Task<Product> GetProductAsync(string id);
 		Task UpdateProductAsync(Product product);
+		Task DeleteProductAsync(Guid id);
 	}
 }
