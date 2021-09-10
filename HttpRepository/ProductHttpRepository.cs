@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -45,6 +46,20 @@ namespace BlazorProducts.Client.HttpRepository
 			};
 
 			return paginResponse;
+		}
+
+		public async Task CreateProduct(Product product)
+		{
+			var content = JsonSerializer.Serialize(product);
+			var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+			var postResult = await _httpClient.PostAsync("products", bodyContent);
+			var postContent = await postResult.Content.ReadAsStringAsync();
+
+			if (!postResult.IsSuccessStatusCode)
+			{
+				throw new ApplicationException(postContent);
+			}
 		}
 	}
 }
