@@ -11,5 +11,7 @@ namespace BlazorProducts.Client.HttpRepository
 		Task<PagingResponse<Product>> GetProductsAsync(ProductParameters productParameters);
 		Task CreateProduct(Product product);
 		Task<string> UploadProductImage(MultipartFormDataContent content);
+		Task<Product> GetProductAsync(string id);
+		Task UpdateProductAsync(Product product);
 	}
 }

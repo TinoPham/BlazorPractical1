@@ -79,5 +79,35 @@ namespace BlazorProducts.Client.HttpRepository
 			}
 		}
 
+		public async Task<Product> GetProductAsync(string id)
+		{
+			var url = Path.Combine("products", id);
+
+			var response = await _httpClient.GetAsync(url);
+			var content = await response.Content.ReadAsStringAsync();
+			if (!response.IsSuccessStatusCode)
+			{
+				throw new ApplicationException(content);
+			}
+
+			var product = JsonSerializer.Deserialize<Product>(content, _jsonSerializerOptions);
+			return product;
+		}
+
+		public async Task UpdateProductAsync(Product product)
+		{
+			var content = JsonSerializer.Serialize(product);
+			var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+			var url = Path.Combine("products", product.Id.ToString());
+
+			var putResult = await _httpClient.PutAsync(url, bodyContent);
+			var putContent = await putResult.Content.ReadAsStringAsync();
+
+			if (!putResult.IsSuccessStatusCode)
+			{
+				throw new ApplicationException(putContent);
+			}
+		}
+
 	}
 }
