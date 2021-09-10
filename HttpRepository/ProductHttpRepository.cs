@@ -4,6 +4,7 @@ using BlazorProducts.Shared.RequestFetures;
 using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -61,5 +62,22 @@ namespace BlazorProducts.Client.HttpRepository
 				throw new ApplicationException(postContent);
 			}
 		}
+
+		public async Task<string> UploadProductImage(MultipartFormDataContent content)
+		{
+			var postResult = await _httpClient.PostAsync("https://localhost:5011/api/upload", content);
+			var postContent = await postResult.Content.ReadAsStringAsync();
+
+			if (!postResult.IsSuccessStatusCode)
+			{
+				throw new ApplicationException(postContent);
+			}
+			else
+			{
+				var imgUrl = Path.Combine("https://localhost:5011/", postContent);
+				return imgUrl;
+			}
+		}
+
 	}
 }
