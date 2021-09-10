@@ -1,9 +1,7 @@
 ﻿using BlazorProducts.Client.Features;
 using BlazorProducts.Shared.Entities;
 using BlazorProducts.Shared.RequestFetures;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace BlazorProducts.Client.HttpRepository
@@ -12,5 +10,6 @@ namespace BlazorProducts.Client.HttpRepository
 	{
 		Task<PagingResponse<Product>> GetProductsAsync(ProductParameters productParameters);
 		Task CreateProduct(Product product);
+		Task<string> UploadProductImage(MultipartFormDataContent content);
 	}
 }

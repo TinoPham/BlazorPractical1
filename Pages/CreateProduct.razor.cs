@@ -10,6 +10,7 @@ namespace BlazorProducts.Client.Pages
 	{
 		private Product _product = new Product();
 		private SuccessNotification _notification;
+		private void AssignImageUrl(string imgUrl) => _product.ImageUrl = imgUrl;
 
 		[Inject]
 		public IProductHttpRepository ProductRepo { get; set; }
